@@ -1,0 +1,10 @@
+{
+  "name": "asarboots",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Asar boots — мобильный лендинг-магазин ботинок из Уральска",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  }
+}
