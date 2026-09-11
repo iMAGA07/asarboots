@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<div class="announce"><div class="wrap"><b>−37%</b> на все цвета<span class="sep"></span>Доставка по Казахстану<span class="sep"></span>Обмен размера 14 дней</div></div>
+<div class="announce"><div class="wrap" id="announce"><b>−37%</b> на все цвета<span class="sep"></span>Доставка по Казахстану<span class="sep"></span>Обмен размера 14 дней</div></div>
 
 <header class="hdr">
   <div class="wrap hdr-in">
@@ -70,6 +70,7 @@
       <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm.5-13h-1.5v6l5 3 .75-1.23-4.25-2.52z"/></svg>
       <span>Скидка закреплена за вами на <b id="tMM">15</b>:<b id="tSS">00</b></span>
     </div>
+    <p class="proof" id="proofLine" hidden><i></i><span></span></p>
 
     <div class="opt">
       <div class="opt-lbl">Цвет: <b id="colorName">Чёрные</b></div>
@@ -94,15 +95,18 @@
       <p class="stock" id="stockLine">Выберите размер</p>
     </div>
 
+    <p class="ship-line" id="shipLine" hidden><svg viewBox="0 0 24 24"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7zM6 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg><span></span></p>
+
     <div class="cta">
       <button type="button" class="btn btn-primary btn-lg" id="buyBtn">Купить сейчас · <span id="buyPrice">22 000 ₸</span></button>
       <button type="button" class="btn btn-secondary btn-lg" id="addBtn">В корзину</button>
     </div>
     <ul class="cta-notes">
-      <li>Оплата Kaspi: перевод, QR, Kaspi Red</li>
+      <li>Без предоплаты на сайте: сначала фото вашей пары, потом оплата Kaspi</li>
       <li>Отправка в день оплаты, 1–5 дней по Казахстану</li>
-      <li>Не подошёл размер — обменяем в течение 14 дней</li>
+      <li id="moneyBackNote">14 дней на обмен размера или возврат денег</li>
     </ul>
+    <div class="nudge" id="bundleNudge" hidden><svg viewBox="0 0 24 24"><path d="M20 7h-3.2A3 3 0 0 0 12 4.8 3 3 0 0 0 7.2 7H4a2 2 0 0 0-2 2v2h20V9a2 2 0 0 0-2-2zm-8-1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM2 13v6a2 2 0 0 0 2 2h7v-8H2zm11 8h7a2 2 0 0 0 2-2v-6h-9v8z"/></svg><span><b>Берёте две пары?</b> Доставка бесплатно: себе и мужу, жене или на оба сезона.</span></div>
   </div>
 </main>
 
@@ -131,6 +135,17 @@
       <div class="stat"><b id="statStock">1 500+</b><span>пар на складе, размеры 36–45</span></div>
       <div class="stat"><b>14 дней</b><span>на обмен размера</span></div>
       <div class="stat"><b>−25°</b><span>зимние на натуральном меху</span></div>
+    </div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th></th><th>Asar boots</th><th>Магазин в ТРЦ</th></tr></thead>
+        <tbody>
+          <tr><td>Цена за пару</td><td>22 000 ₸</td><td>45 000–60 000 ₸</td></tr>
+          <tr><td>Откуда</td><td>Со склада производителя, Уральск</td><td>Через посредников и аренду</td></tr>
+          <tr><td>Не подошёл размер</td><td>14 дней, вышлем другой размер на дом</td><td>Ехать в магазин, обмен по правилам сети</td></tr>
+          <tr><td>Как получить</td><td>Курьером по всему Казахстану, 1–5 дней</td><td>Только в городах с магазином</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -188,6 +203,16 @@
   </div>
 </section>
 
+<section class="sec" id="reviews" hidden>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Отзывы покупателей</h2>
+      <p>Пишут те, кто уже получил свою пару.</p>
+    </div>
+    <div class="reviews" id="reviewsList"></div>
+  </div>
+</section>
+
 <section class="sec" id="faq">
   <div class="wrap wrap-narrow">
     <div class="sec-head">
@@ -235,7 +260,7 @@
 </footer>
 
 <div class="sticky" id="sticky">
-  <div class="sticky-price"><b id="stickyNow">22 000 ₸</b><s id="stickyOld">34 900 ₸</s></div>
+  <div class="sticky-price"><b id="stickyNow">22 000 ₸</b><s id="stickyOld">34 900 ₸</s><span class="sticky-size" id="stickySize" hidden></span></div>
   <button type="button" class="btn btn-primary" id="stickyBtn">Купить</button>
 </div>
 
@@ -259,6 +284,7 @@
         <div class="row"><span>Товары</span><b id="sumItems">0 ₸</b></div>
         <div class="row"><span>Доставка</span><b id="sumDl">2 000 ₸</b></div>
         <div class="row total"><span>Итого</span><b id="sumTotal">0 ₸</b></div>
+        <p class="cart-nudge" id="cartNudge" hidden><svg viewBox="0 0 24 24"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7zM6 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg><span></span></p>
       </div>
       <form id="orderForm" class="form" novalidate hidden>
         <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" required></label>
@@ -305,6 +331,23 @@
         <h3>Принято</h3>
         <p>Перезвоним в ближайшие минуты.</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Помощь с размером (показывается один раз, если размер долго не выбран) -->
+<div class="sheet" id="assistSheet" hidden>
+  <div class="sheet-bg" data-close></div>
+  <div class="sheet-body sheet-sm" role="dialog" aria-modal="true" aria-labelledby="assistTitle">
+    <button type="button" class="sheet-close" data-close aria-label="Закрыть">✕</button>
+    <div class="sheet-in">
+      <h3 id="assistTitle">Не уверены в размере?</h3>
+      <p class="muted">Напишите длину стопы в сантиметрах. Подберём размер, проверим наличие и ответим за минуту.</p>
+      <div class="assist-btns">
+        <a class="btn btn-primary btn-lg" id="waAssist" href="#" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <button type="button" class="btn btn-secondary btn-lg" id="assistCall">Заказать звонок</button>
+      </div>
+      <p class="hint center">Скидка закреплена за вами, никуда не денется.</p>
     </div>
   </div>
 </div>

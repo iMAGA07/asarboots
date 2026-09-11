@@ -105,15 +105,68 @@
     if (S.size) {
       const left = stockOf(S.season, S.color, S.size);
       if (left <= 3) { t = `Размер ${S.size}: ${pairs(left)}, последние`; hot = true; }
-      else if (left <= 8) { t = `Размер ${S.size}: осталось ${pairs(left)}`; hot = true; }
+      else if (left <= ((D.promo && D.promo.lowStockThreshold) || 8)) { t = `Размер ${S.size}: осталось ${pairs(left)}`; hot = true; }
       else t = `Размер ${S.size} в наличии. Отправим в день оплаты.`;
     }
     el.textContent = t; el.classList.toggle('hot', hot);
   }
   $('.size-groups').addEventListener('click', e => {
     const c = e.target.closest('.chip'); if (!c) return;
-    S.size = +c.dataset.size; renderSizes();
+    S.size = +c.dataset.size; renderSizes(); updateSticky();
   });
+
+  /* ---------- Триггеры продаж (настройки в data.js → promo) ---------- */
+  (function triggers() {
+    const P = D.promo || {};
+    const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    // дата окончания цен в верхней строке
+    if (P.saleEnds) {
+      const d = new Date(P.saleEnds + 'T23:59:59');
+      if (d > new Date()) $('#announce').innerHTML = `<b>−37%</b> на все цвета до ${d.getDate()} ${MONTHS[d.getMonth()]}<span class="sep"></span>Доставка по Казахстану<span class="sep"></span>Обмен ${P.moneyBackDays || 14} дней`;
+    }
+    // соцдоказательство
+    if (P.soldPairs > 0) { $('#proofLine').hidden = false; $('#proofLine span').textContent = `Уже отправили ${fmt(P.soldPairs)}+ пар по Казахстану`; }
+    // возврат денег
+    if (P.moneyBackDays) $('#moneyBackNote').textContent = `${P.moneyBackDays} дней на обмен размера или возврат денег`;
+    // отправка сегодня / завтра
+    if (P.shippingCutoffHour) {
+      const upd = () => {
+        const h = new Date().getHours(), left = P.shippingCutoffHour - h;
+        const s = $('#shipLine span'); $('#shipLine').hidden = false;
+        if (h < P.shippingCutoffHour) s.innerHTML = left <= 6 ? `Закажите в ближайшие <b>${left} ч</b> — отправим <b>сегодня</b>` : `Закажите до <b>${P.shippingCutoffHour}:00</b> — отправим <b>сегодня</b>`;
+        else s.innerHTML = `Закажите сейчас — отправим <b>завтра утром</b>`;
+      };
+      upd(); setInterval(upd, 60000);
+    }
+    // остаток зимних в переключателе сезона
+    const winterLeft = D.colors.reduce((a, c) => a + D.stock.winter[c.id].reduce((x, y) => x + y, 0), 0);
+    $('#segW').textContent = tg(D.price.winter.now) + (winterLeft < 300 ? ` · осталось ${winterLeft}` : '');
+    // вторая пара — доставка бесплатно
+    if (P.freeDeliveryFromPairs === 2) $('#bundleNudge').hidden = false;
+    // отзывы (только если заполнены в data.js)
+    if (Array.isArray(D.reviews) && D.reviews.length) {
+      $('#reviews').hidden = false;
+      $('#reviewsList').innerHTML = D.reviews.map(r => {
+        const c = r.color && colorById(r.color); const dt = r.date ? new Date(r.date) : null;
+        return `<article class="rev"><div class="rev-head"><b>${r.name}${r.city ? ', ' + r.city : ''}</b><span>${dt ? dt.getDate() + ' ' + MONTHS[dt.getMonth()] : ''}</span></div><div class="rev-stars">★★★★★</div><p>${r.text}</p>${r.size ? `<span class="rev-tag">Размер ${r.size}${c ? ', ' + c.name.toLowerCase() : ''}</span>` : ''}</article>`;
+      }).join('');
+    }
+    // помощь с размером: один раз за сессию, если размер не выбран и корзина пуста
+    if (P.assistAfterSec > 0) {
+      let shown = false; try { shown = sessionStorage.getItem('asar-assist') === '1'; } catch (e) {}
+      $('#waAssist').href = waLink('Здравствуйте! Помогите подобрать размер ботинок Asar boots. Длина стопы: __ см.');
+      $('#assistCall').addEventListener('click', () => { hide(); setTimeout(openCall, 50); });
+      const fire = () => {
+        if (S.size || cart.length || openSheet) return;
+        if (document.visibilityState !== 'visible' && !location.search.includes('assist=1')) {
+          document.addEventListener('visibilitychange', () => setTimeout(fire, 3000), { once: true }); return;
+        }
+        try { sessionStorage.setItem('asar-assist', '1'); } catch (e) {}
+        show('assistSheet'); track('Lead', { content_name: 'assist_prompt' });
+      };
+      if (!shown) setTimeout(fire, P.assistAfterSec * 1000);
+    }
+  })();
 
   renderGallery(); renderSwatches(); renderPrice(); renderSizes();
 
@@ -144,7 +197,9 @@
   const save = () => { try { localStorage.setItem('asar-cart', JSON.stringify(cart)); } catch (e) {} };
   const cartCount = () => cart.reduce((a, i) => a + i.qty, 0);
   const cartSum = () => cart.reduce((a, i) => a + i.qty * D.price[i.season].now, 0);
-  const deliveryCost = () => ($('#orderForm [name=pickup]').checked || !cart.length) ? 0 : D.delivery;
+  const PR = D.promo || {};
+  const freeByBundle = () => PR.freeDeliveryFromPairs > 0 && cartCount() >= PR.freeDeliveryFromPairs;
+  const deliveryCost = () => ($('#orderForm [name=pickup]').checked || !cart.length || freeByBundle()) ? 0 : D.delivery;
 
   function addToCart(color, season, size) {
     const it = cart.find(i => i.color === color && i.season === season && i.size === size);
@@ -166,6 +221,13 @@
     const sum = cartSum(), dl = deliveryCost();
     $('#sumItems').textContent = tg(sum); $('#sumDl').textContent = dl ? tg(dl) : 'бесплатно';
     $('#sumTotal').textContent = tg(sum + dl); $('#btnTotal').textContent = tg(sum + dl);
+    const nd = $('#cartNudge'), pickup = $('#orderForm [name=pickup]').checked;
+    if (PR.freeDeliveryFromPairs > 0 && n > 0 && !pickup) {
+      nd.hidden = false;
+      $('span', nd).textContent = freeByBundle()
+        ? `Доставка бесплатно: ${pairs(n)} едут одной посылкой.`
+        : `Добавьте ${PR.freeDeliveryFromPairs - n === 1 ? 'ещё одну пару' : 'ещё ' + pairs(PR.freeDeliveryFromPairs - n)} — доставка бесплатно, экономия ${tg(D.delivery)}.`;
+    } else nd.hidden = true;
     updateSticky();
   }
   function cartView(mode) { // 'cart' | 'success'
@@ -261,7 +323,11 @@
 
   /* Липкая панель: показываем, когда основная кнопка ушла с экрана */
   let ctaVisible = true;
-  function updateSticky() { $('#sticky').classList.toggle('hide', ctaVisible || !!openSheet); }
+  function updateSticky() {
+    $('#sticky').classList.toggle('hide', ctaVisible || !!openSheet);
+    const ss = $('#stickySize'); ss.hidden = !S.size; if (S.size) ss.textContent = `Размер ${S.size} · ${colorById(S.color).name.toLowerCase()}`;
+    $('#stickyOld').hidden = !!S.size;
+  }
   new IntersectionObserver(([en]) => { ctaVisible = en.isIntersecting; updateSticky(); }, { threshold: 0 }).observe($('#buyBtn'));
   renderCart();
 
