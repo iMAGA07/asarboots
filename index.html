@@ -20,33 +20,44 @@
 </head>
 <body>
 
-<div class="announce"><b>−37%</b> на все цвета<span class="sep">·</span>Доставка по Казахстану<span class="sep">·</span>Обмен размера</div>
+<div class="announce"><div class="wrap"><b>−37%</b> на все цвета<span class="sep"></span>Доставка по Казахстану<span class="sep"></span>Обмен размера 14 дней</div></div>
 
 <header class="hdr">
-  <a class="logo" href="#" aria-label="Asar boots"><img src="img/logo.png" width="480" height="304" alt="Asar boots"></a>
-  <div class="hdr-actions">
-    <button class="ibtn" id="callTop" aria-label="Заказать звонок">
-      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
-    </button>
-    <button class="ibtn" id="cartTop" aria-label="Корзина">
-      <svg viewBox="0 0 24 24"><path d="M7 4h-2l-1 2h2l2.4 9.6a2 2 0 0 0 2 1.4h7.2a2 2 0 0 0 1.9-1.4L21.5 8H7.6L7 4zm3 15a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
-      <span class="badge" id="cartCount" hidden>0</span>
-    </button>
+  <div class="wrap hdr-in">
+    <a class="logo" href="#" aria-label="Asar boots"><img src="img/logo.svg" width="160" height="112" alt="Asar boots"></a>
+    <nav class="nav">
+      <a href="#why">О ботинках</a>
+      <a href="#sizes">Размеры</a>
+      <a href="#delivery">Доставка</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="hdr-actions">
+      <a class="hdr-phone" id="phoneTop" href="#">+7 700 000 00 00</a>
+      <button type="button" class="ibtn" id="callTop" aria-label="Заказать звонок">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
+      </button>
+      <button type="button" class="ibtn" id="cartTop" aria-label="Корзина">
+        <svg viewBox="0 0 24 24"><path d="M7 4h-2l-1 2h2l2.4 9.6a2 2 0 0 0 2 1.4h7.2a2 2 0 0 0 1.9-1.4L21.5 8H7.6L7 4zm3 15a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+        <span class="badge" id="cartCount" hidden>0</span>
+      </button>
+    </div>
   </div>
 </header>
 
-<main class="product">
-  <!-- Галерея выбранного цвета -->
-  <div class="gallery">
-    <div class="g-track" id="gTrack"></div>
-    <div class="g-dots" id="gDots"></div>
-    <span class="g-badge" id="gBadge">−37%</span>
+<main class="product wrap">
+  <div class="media">
+    <div class="gallery">
+      <div class="g-track" id="gTrack"></div>
+      <div class="g-dots" id="gDots"></div>
+      <span class="g-badge" id="gBadge">−37%</span>
+    </div>
+    <div class="g-thumbs" id="gThumbs"></div>
   </div>
 
   <div class="info">
     <div class="ttl">
+      <p class="crumb">Сделано в Уральске · нубук · подошва 3 см</p>
       <h1>Ботинки Asar boots</h1>
-      <p class="ttl-sub">Нубук · толстая подошва · сделано в Уральске</p>
     </div>
 
     <div class="price">
@@ -84,92 +95,143 @@
     </div>
 
     <div class="cta">
-      <button type="button" class="btn btn-primary" id="buyBtn">Купить сейчас · <span id="buyPrice">22 000 ₸</span></button>
-      <button type="button" class="btn btn-secondary" id="addBtn">В корзину</button>
+      <button type="button" class="btn btn-primary btn-lg" id="buyBtn">Купить сейчас · <span id="buyPrice">22 000 ₸</span></button>
+      <button type="button" class="btn btn-secondary btn-lg" id="addBtn">В корзину</button>
     </div>
     <ul class="cta-notes">
       <li>Оплата Kaspi: перевод, QR, Kaspi Red</li>
       <li>Отправка в день оплаты, 1–5 дней по Казахстану</li>
-      <li>Не подошёл размер — обменяем</li>
+      <li>Не подошёл размер — обменяем в течение 14 дней</li>
     </ul>
   </div>
 </main>
 
 <section class="trust">
-  <div class="t"><svg viewBox="0 0 24 24"><path d="M3 21V9l6 4V9l6 4V4h6v17H3z"/></svg><span>Своё производство<br>в Уральске</span></div>
-  <div class="t"><svg viewBox="0 0 24 24"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7zM6 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg><span>Доставка<br>по Казахстану</span></div>
-  <div class="t"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9.4-8 11-4.5-1.6-8-6-8-11V5l8-3zm-1 13l6-6-1.4-1.4L11 12.2 8.4 9.6 7 11l4 4z"/></svg><span>Обмен<br>размера</span></div>
-  <div class="t"><svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 4v2h16V9H4zm2 5v2h5v-2H6z"/></svg><span>Оплата<br>Kaspi</span></div>
+  <div class="wrap trust-in">
+    <div class="t"><svg viewBox="0 0 24 24"><path d="M3 21V9l6 4V9l6 4V4h6v17H3z"/></svg><span>Своё производство<br>в Уральске</span></div>
+    <div class="t"><svg viewBox="0 0 24 24"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7zM6 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg><span>Доставка<br>по Казахстану</span></div>
+    <div class="t"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9.4-8 11-4.5-1.6-8-6-8-11V5l8-3zm-1 13l6-6-1.4-1.4L11 12.2 8.4 9.6 7 11l4 4z"/></svg><span>Обмен<br>размера</span></div>
+    <div class="t"><svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 4v2h16V9H4zm2 5v2h5v-2H6z"/></svg><span>Оплата<br>Kaspi</span></div>
+  </div>
 </section>
 
 <section class="sec" id="why">
-  <h2>Что вы получаете</h2>
-  <div class="feat">
-    <figure><img src="img/detail-side.webp" width="340" height="400" loading="lazy" alt="Нубук и тройная строчка"><figcaption><b>Нубук и тройная строчка</b><span>Плотная кожа, прошитый союзка. Не промокают в слякоть, держат форму сезон за сезоном.</span></figcaption></figure>
-    <figure><img src="img/detail-sole.webp" width="270" height="160" loading="lazy" alt="Подошва с глубоким протектором"><figcaption><b>Подошва 3 см с протектором</b><span>Не скользит на снегу и мокром асфальте. Лёгкая, не дубеет на морозе.</span></figcaption></figure>
-    <figure><img src="img/detail-box.webp" width="335" height="289" loading="lazy" alt="Фирменная коробка Asar boots"><figcaption><b>В фирменной коробке</b><span>Новая пара со склада производителя. Годится и как подарок.</span></figcaption></figure>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Что вы получаете</h2>
+      <p>Ботинки, которые в торговых центрах стоят 45–60 тысяч. Та же кожа, та же подошва, без наценки магазина.</p>
+    </div>
+    <div class="feat">
+      <figure><div class="feat-img"><img src="img/detail-side.webp" width="340" height="400" loading="lazy" alt="Нубук и тройная строчка"></div><figcaption><b>Нубук и тройная строчка</b><span>Плотная кожа, прошитая союзка. Не промокают в слякоть, держат форму сезон за сезоном.</span></figcaption></figure>
+      <figure><div class="feat-img"><img src="img/detail-sole.webp" width="270" height="160" loading="lazy" alt="Подошва с глубоким протектором"></div><figcaption><b>Подошва 3 см с протектором</b><span>Не скользит на снегу и мокром асфальте. Лёгкая, не дубеет на морозе.</span></figcaption></figure>
+      <figure><div class="feat-img"><img src="img/detail-box.webp" width="335" height="289" loading="lazy" alt="Фирменная коробка Asar boots"></div><figcaption><b>В фирменной коробке</b><span>Новая пара со склада производителя. Годится и как подарок.</span></figcaption></figure>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>−37%</b><span>к цене прошлого сезона</span></div>
+      <div class="stat"><b id="statStock">1 500+</b><span>пар на складе, размеры 36–45</span></div>
+      <div class="stat"><b>14 дней</b><span>на обмен размера</span></div>
+      <div class="stat"><b>−25°</b><span>зимние на натуральном меху</span></div>
+    </div>
   </div>
-  <ul class="checks">
-    <li><b>Зима на натуральном меху.</b> Тёплые до −25°. Внешне такие же, как осенние.</li>
-    <li><b>Одна колодка, размер в размер.</b> Стелька в сантиметрах в таблице ниже.</li>
-    <li><b>Без наценки магазинов.</b> Продаём со своего склада в Уральске, поэтому 22 000 ₸, а не 45.</li>
-  </ul>
 </section>
 
-<section class="sec sec-photo">
-  <img src="img/detail-group.webp" width="750" height="540" loading="lazy" alt="Ботинки Asar boots в пяти цветах на фирменных коробках">
-  <p>Пять цветов: чёрные, коричневые, бежевые, серые, синие. Одна модель, одна цена.</p>
+<section class="band">
+  <div class="wrap band-in">
+    <div class="band-text">
+      <h2>Пять цветов.<br>Одна колодка.</h2>
+      <p>Чёрные и коричневые берут на каждый день, бежевые и серые — под светлую верхнюю одежду, синие — когда хочется выделиться. Размер в размер во всех цветах.</p>
+      <ul class="colors-list" id="colorsList"></ul>
+      <a class="btn btn-primary" href="#swatches">Выбрать цвет</a>
+    </div>
+    <div class="band-img"><img src="img/detail-group.webp" width="750" height="540" loading="lazy" alt="Ботинки Asar boots в пяти цветах на фирменных коробках"></div>
+  </div>
 </section>
 
 <section class="sec" id="sizes">
-  <h2>Как выбрать размер</h2>
-  <ol class="steps">
-    <li>Поставьте стопу на лист бумаги и обведите карандашом.</li>
-    <li>Измерьте длину от пятки до большого пальца в сантиметрах.</li>
-    <li>Найдите значение в таблице. Если между размерами, берите больший.</li>
-  </ol>
-  <div class="table-wrap"><table class="size-table" id="sizeTable"></table></div>
-  <p class="hint">Для зимних с мехом под тёплый носок можно взять на размер больше.</p>
-  <a class="btn btn-secondary" id="waSize" href="#" target="_blank" rel="noopener">Спросить про размер в WhatsApp</a>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Как выбрать размер</h2>
+      <p>Ботинки идут размер в размер. Замер занимает минуту.</p>
+    </div>
+    <div class="sizes-grid">
+      <ol class="steps">
+        <li><b>Обведите стопу.</b> Поставьте ногу на лист бумаги и обведите карандашом.</li>
+        <li><b>Измерьте длину.</b> От пятки до кончика большого пальца, в сантиметрах.</li>
+        <li><b>Найдите размер в таблице.</b> Если между размерами, берите больший.</li>
+      </ol>
+      <div>
+        <div class="table-wrap"><table class="size-table" id="sizeTable"></table></div>
+        <p class="hint">Для зимних с мехом под тёплый носок можно взять на размер больше.</p>
+        <a class="btn btn-secondary" id="waSize" href="#" target="_blank" rel="noopener">Спросить про размер в WhatsApp</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="sec" id="delivery">
-  <h2>Доставка и оплата</h2>
-  <div class="two">
-    <div class="box">
-      <h3>Доставка</h3>
-      <p>По Казахстану — <b><span id="dlPrice">2 000</span> ₸</b>, 1–5 дней. Трек-номер присылаем в WhatsApp.</p>
-      <p>Самовывоз в <span id="pickupCity">Уральске</span> — бесплатно, с примеркой.</p>
+<section class="sec sec-alt" id="delivery">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Доставка и оплата</h2>
     </div>
-    <div class="box">
-      <h3>Оплата</h3>
-      <p><b>Kaspi</b>: перевод по номеру, QR или ссылка. Kaspi Red и рассрочка по запросу.</p>
-      <p>Перед отправкой присылаем фото вашей пары.</p>
+    <div class="two">
+      <div class="box">
+        <h3>Доставка</h3>
+        <p>По Казахстану — <b><span id="dlPrice">2 000</span> ₸</b>, 1–5 дней в зависимости от города. Трек-номер присылаем в WhatsApp.</p>
+        <p>Самовывоз в <span id="pickupCity">Уральске</span> — бесплатно, с примеркой.</p>
+      </div>
+      <div class="box">
+        <h3>Оплата</h3>
+        <p><b>Kaspi</b>: перевод по номеру, QR или ссылка. Kaspi Red и рассрочка по запросу.</p>
+        <p>Без предоплаты на сайте: менеджер подтверждает заказ, присылает фото вашей пары и реквизиты.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="sec" id="faq">
-  <h2>Вопросы</h2>
-  <details><summary>Почему такая цена?</summary><p>Распродаём остаток склада со своего производства. Пары новые, в коробках. Нет аренды магазина и посредников, поэтому цена ниже розничной.</p></details>
-  <details><summary>Чем отличаются осенние и зимние?</summary><p>Внешне одинаковые. Зимние внутри на натуральном меху, для холодов до −25°. Осенние на текстильной подкладке, на сезон от +10° до −5°.</p></details>
-  <details><summary>Что если размер не подойдёт?</summary><p>Напишите в WhatsApp в течение 14 дней. Отправьте пару обратно, вышлем другой размер. Ботинки должны быть не ношены.</p></details>
-  <details><summary>Есть ли примерка?</summary><p>В Уральске — да, при самовывозе. В другие города отправляем после оплаты, поэтому важно измерить стопу по таблице.</p></details>
-  <details><summary>Когда придёт заказ?</summary><p>Отправляем в день оплаты. По Казахстану 1–5 дней в зависимости от города.</p></details>
+  <div class="wrap wrap-narrow">
+    <div class="sec-head">
+      <h2>Вопросы</h2>
+    </div>
+    <details><summary>Почему такая цена?</summary><p>Распродаём остаток склада со своего производства. Пары новые, в коробках. Нет аренды магазина и посредников, поэтому цена ниже розничной.</p></details>
+    <details><summary>Чем отличаются осенние и зимние?</summary><p>Внешне одинаковые. Зимние внутри на натуральном меху, для холодов до −25°. Осенние на текстильной подкладке, на сезон от +10° до −5°.</p></details>
+    <details><summary>Что если размер не подойдёт?</summary><p>Напишите в WhatsApp в течение 14 дней. Отправьте пару обратно, вышлем другой размер. Ботинки должны быть не ношены.</p></details>
+    <details><summary>Есть ли примерка?</summary><p>В Уральске — да, при самовывозе. В другие города отправляем после оплаты, поэтому важно измерить стопу по таблице.</p></details>
+    <details><summary>Когда придёт заказ?</summary><p>Отправляем в день оплаты. По Казахстану 1–5 дней в зависимости от города.</p></details>
+  </div>
 </section>
 
-<section class="sec final">
-  <h2>Ваш размер ещё в наличии</h2>
-  <p>Ходовые размеры 37–38 и 42–43 заканчиваются первыми. Остаток не пополняется.</p>
-  <a class="btn btn-primary" href="#sizeOpt">Выбрать размер</a>
-  <button type="button" class="btn btn-secondary" id="callFinal">Заказать звонок</button>
+<section class="final">
+  <div class="wrap wrap-narrow final-in">
+    <h2>Ваш размер ещё в наличии</h2>
+    <p>Ходовые размеры 37–38 и 42–43 заканчиваются первыми. Остаток не пополняется.</p>
+    <div class="final-btns">
+      <a class="btn btn-primary btn-lg" href="#sizeOpt">Выбрать размер</a>
+      <button type="button" class="btn btn-secondary btn-lg" id="callFinal">Заказать звонок</button>
+    </div>
+  </div>
 </section>
 
 <footer class="foot">
-  <img src="img/logo.png" width="120" height="76" alt="Asar boots" loading="lazy">
-  <p>Производство обуви, г. Уральск. Доставка по Казахстану.</p>
-  <p><a id="phoneFoot" href="#">+7 700 000 00 00</a> · <a id="igFoot" href="#" target="_blank" rel="noopener">Instagram</a> · <a id="waFoot" href="#" target="_blank" rel="noopener">WhatsApp</a></p>
-  <p class="copy">© <span id="year"></span> Asar boots</p>
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <img src="img/logo.svg" width="120" height="84" alt="Asar boots" loading="lazy">
+      <p>Производство обуви, г. Уральск.<br>Доставка по всему Казахстану.</p>
+    </div>
+    <div class="foot-col">
+      <b>Связь</b>
+      <a id="phoneFoot" href="#">+7 700 000 00 00</a>
+      <a id="waFoot" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a id="igFoot" href="#" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <div class="foot-col">
+      <b>Покупателям</b>
+      <a href="#sizes">Таблица размеров</a>
+      <a href="#delivery">Доставка и оплата</a>
+      <a href="#faq">Обмен и возврат</a>
+    </div>
+  </div>
+  <div class="wrap copy">© <span id="year"></span> Asar boots</div>
 </footer>
 
 <div class="sticky" id="sticky">
@@ -209,7 +271,7 @@
         <div class="field-group"><span>Оплата</span>
           <div class="seg"><label class="seg-btn"><input type="radio" name="pay" value="kaspi" checked><span>Kaspi перевод</span></label><label class="seg-btn"><input type="radio" name="pay" value="kaspi_red"><span>Kaspi Red / рассрочка</span></label></div>
         </div>
-        <button class="btn btn-primary" type="submit" id="orderSubmit"><span id="btnLabel">Оформить заказ</span> · <span id="btnTotal">0 ₸</span></button>
+        <button class="btn btn-primary btn-lg" type="submit" id="orderSubmit"><span id="btnLabel">Оформить заказ</span> · <span id="btnTotal">0 ₸</span></button>
         <p class="hint center">Без предоплаты на сайте. Менеджер подтвердит заказ и пришлёт реквизиты Kaspi.</p>
         <p class="err" id="formErr" hidden></p>
       </form>
@@ -217,7 +279,7 @@
         <div class="ok">✓</div>
         <h3>Заказ принят</h3>
         <p>Номер <b id="orderNo"></b>. Свяжемся в течение 10 минут, пришлём реквизиты Kaspi и фото вашей пары.</p>
-        <a class="btn btn-primary" id="waOrder" href="#" target="_blank" rel="noopener">Открыть WhatsApp с заказом</a>
+        <a class="btn btn-primary btn-lg" id="waOrder" href="#" target="_blank" rel="noopener">Открыть WhatsApp с заказом</a>
         <p class="hint center">Так быстрее: менеджер сразу увидит ваш заказ.</p>
       </div>
     </div>
@@ -235,7 +297,7 @@
       <form id="callForm" class="form" novalidate>
         <label class="field"><span>Телефон</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 ___ ___ __ __" required></label>
         <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="name" placeholder="Необязательно"></label>
-        <button class="btn btn-primary" type="submit">Жду звонка</button>
+        <button class="btn btn-primary btn-lg" type="submit">Жду звонка</button>
         <p class="err" id="callErr" hidden></p>
       </form>
       <div class="success" id="callSuccess" hidden>

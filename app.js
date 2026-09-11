@@ -53,12 +53,21 @@
     const views = [['main', 'спереди'], ['side', 'сбоку'], ['back', 'сзади']];
     $('#gTrack').innerHTML = views.map(([v, t], i) => `<div><img src="img/${S.color}-${v}.webp" alt="Ботинки ${c.name.toLowerCase()} Asar boots, вид ${t}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></div>`).join('');
     $('#gDots').innerHTML = views.map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('');
+    $('#gThumbs').innerHTML = views.map(([v, t], i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}" aria-label="Вид ${t}"><img src="img/${S.color}-${v}.webp" alt="" loading="lazy"></button>`).join('');
     $('#gTrack').scrollLeft = 0;
   }
   $('#gTrack').addEventListener('scroll', () => {
     const t = $('#gTrack'); const i = Math.round(t.scrollLeft / t.clientWidth);
     $$('#gDots i').forEach((d, k) => d.classList.toggle('on', k === i));
+    $$('#gThumbs button').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
   }, { passive: true });
+  $('#gThumbs').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const t = $('#gTrack'); t.scrollTo({ left: t.clientWidth * +b.dataset.i, behavior: 'smooth' });
+  });
+  $('#colorsList').innerHTML = D.colors.map(c => `<li><i style="background:${c.hex}"></i>${c.name}</li>`).join('');
+  $('#phoneTop').textContent = D.phone; $('#phoneTop').href = 'tel:' + D.phone.replace(/[^\d+]/g, '');
+  (function () { const n = ['autumn', 'winter'].reduce((a, s) => a + D.colors.reduce((b, c) => b + D.stock[s][c.id].reduce((x, y) => x + y, 0), 0), 0); $('#statStock').textContent = fmt(Math.floor(n / 100) * 100) + '+'; })();
 
   function renderSwatches() {
     $('#swatches').innerHTML = D.colors.map(c => `<button type="button" class="sw" data-color="${c.id}" aria-pressed="${c.id === S.color}" aria-label="${c.name}"><img src="img/${c.id}-side.webp" alt=""><span>${c.name}</span></button>`).join('');
